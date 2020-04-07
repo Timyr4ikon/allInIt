@@ -3583,6 +3583,7 @@ display: block;
 .indent{
    text-indent: 6px;
    font-weight: 300;
+   word-wrap: break-word;
 }
 
 
