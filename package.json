@@ -49,6 +49,8 @@
     "webpackbar": "^4.0.0"
   },
   "dependencies": {
+    "axios": "^0.19.2",
+    "bootbox": "^5.4.0",
     "core-js": "^3.3.4",
     "handlebars": "^4.5.3",
     "pnotify": "^4.0.1"

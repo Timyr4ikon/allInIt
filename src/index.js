@@ -1,30 +1,49 @@
 import './styles.css';
-import  '../node_modules/pnotify/dist/PNotifyBrightTheme.css'
+import './aboutSite.js';
+import images from './imageList.js'
+import axios from 'axios';
+import '../node_modules/pnotify/dist/PNotifyBrightTheme.css'
 import PNotify from '../node_modules/pnotify/dist/es/PNotify.js';
 import PNotifyButtons from '../node_modules/pnotify/dist/es/PNotifyButtons.js';
-PNotify.defaults.delay = 2500;
+window.addEventListener('DOMContentLoaded',(e) => {
+  audio = new Audio(); // Создаём новый элемент Audio
+ audio.src = "https://dl1.mp3party.net/download/9230836";
+ successAudio = new Audio(); // Создаём новый элемент Audio
+ successAudio.src = "https://dl.sonq.ru/music/15687/Eminem-feat-Trick-Trick_-_Welcome-2-Detroit_sonq.ru.mp3";
+ HTMLAudioElement.prototype.stop = function(){
+         this.pause();
+         this.currentTime = 0.0;
+ }
+})
 
-// Automatically set the type.
-// PNotify.notice({  text: "I'm a notice."});
-PNotify.info({  text: "I'm glad to se you here! Good day, bro)"});
-// PNotify.success({  text: "I'm a success message."});
-// PNotify.error({  text: "I'm an error message."});
-const LOGLIST = [
-    {
-        name: 'Hob',
-        email:'demasdaso@asdgmail.com',
-        password:'loveydasou3',
-        xp:10,
-    },
-    {
-        name: 'Rob',
-        email:'demo@gmail.com',
-        password:'loveyou3',
-        xp:1110,
-    }
+let audio;
+let successAudio;
+
+PNotify.defaults.delay = 2500;
+PNotify.info({
+  text: `Hey, bro`
+});
+PNotify.info({
+  text: `I recommend you to click on "What can you do?"`
+});
+
+
+
+const LOGLIST = [{
+    name: 'Hob',
+    email: 'demasdaso@asdgmail.com',
+    password: 'loveydasou3',
+    xp: 10,
+  },
+  {
+    name: 'Rob',
+    email: 'demo@gmail.com',
+    password: 'loveyou3',
+    xp: 1110,
+  }
 ]
-if(localStorage.length === 0){
-    localStorage.setItem('loglist',JSON.stringify(LOGLIST));
+if (!localStorage.getItem('loglist')) {
+  localStorage.setItem('loglist', JSON.stringify(LOGLIST));
 }
 const reviewForm = document.querySelector('form[data-action="continue-as-js"]');
 const reviewFirstInput = document.querySelector('#first-input');
@@ -40,107 +59,41 @@ const rpgButton = document.querySelector('.guest__btn');
 let focus;
 
 reviewForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    focus.focus();
+  e.preventDefault();
+  focus.focus();
 })
-reviewForm.addEventListener('click',(e) =>{
-    if(e.target === reviewLabelFirst){
-        reviewFirstInput.checked = true;
-        focus = memberAuto;
+reviewForm.addEventListener('click', (e) => {
+  if (e.target === reviewLabelFirst) {
+    reviewFirstInput.checked = true;
+    focus = memberAuto;
     rpgButton.click();
 
-    }
-    if(e.target === reviewLabelSecond){
-        reviewSecondInput.checked = true;
-        focus = reviewAuto;
+  }
+  if (e.target === reviewLabelSecond) {
+    reviewSecondInput.checked = true;
+    focus = reviewAuto;
     rpgButton.click();
 
-    }
-})
-inputValidators.forEach( el =>{
-    el.addEventListener('focus',(e) =>{
-        // el.validationMessage = 'falf';
-        e.target.classList.add('active');
-    });
-    el.addEventListener('input',(e) => {
-        el.classList.remove('valid','unvalid','active');
-        if(el.validity.valid){
-            el.classList.add('valid');
-        }
-        else{
-            el.classList.add('unvalid');
-        }
-    });
-    el.addEventListener('blur',(e) =>{
-        el.classList.remove('valid','unvalid','active');
-    })
+  }
 })
 
-const images =  [
-    {
-      preview:
-        'https://cdn.pixabay.com/photo/2017/04/08/10/23/surfing-2212948_960_720.jpg',
-      original:
-        'https://cdn.pixabay.com/photo/2017/04/08/10/23/surfing-2212948_960_720.jpg',
-      description: 'Surf',
-    },
-    {
-      preview:
-        'https://cdn.pixabay.com/photo/2019/04/22/04/32/blue-4145659_960_720.jpg',
-      original:
-        'https://cdn.pixabay.com/photo/2019/04/22/04/32/blue-4145659_960_720.jpg',
-      description: 'Surf',
-    },
-    {
-      preview:
-        'https://cdn.pixabay.com/photo/2016/01/19/15/08/ocean-wave-1149174_960_720.jpg',
-      original:
-        'https://cdn.pixabay.com/photo/2016/01/19/15/08/ocean-wave-1149174_960_720.jpg',
-      description: 'Surf',
-    },
-    {
-      preview:
-        'https://cdn.pixabay.com/photo/2017/05/09/16/06/windsurfing-2298647_960_720.jpg',
-      original:
-        'https://cdn.pixabay.com/photo/2017/05/09/16/06/windsurfing-2298647_960_720.jpg',
-      description: 'Surf',
-    },
-    {
-      preview:
-        'https://cdn.pixabay.com/photo/2017/05/22/19/50/surfer-2335088_960_720.jpg',
-      original:
-        'https://cdn.pixabay.com/photo/2017/05/22/19/50/surfer-2335088_960_720.jpg',
-      description: 'Surf',
-    },
-    {
-      preview:
-        'https://cdn.pixabay.com/photo/2017/05/31/11/37/beach-2360136_960_720.jpg',
-      original:
-        'https://cdn.pixabay.com/photo/2017/05/31/11/37/beach-2360136_960_720.jpg',
-      description: 'Surf',
-    },
-    {
-      preview:
-        'https://cdn.pixabay.com/photo/2016/11/18/17/04/liquid-1835846_960_720.jpg',
-      original:
-        'https://cdn.pixabay.com/photo/2016/11/18/17/04/liquid-1835846_960_720.jpg',
-      description: 'Surf',
-    },
-    {
-      preview:
-        'https://cdn.pixabay.com/photo/2015/09/06/01/00/surfing-926822_960_720.jpg',
-      original:
-        'https://cdn.pixabay.com/photo/2015/09/06/01/00/surfing-926822_960_720.jpg',
-      description: 'Surf',
-    },
-    {
-      preview:
-        'https://cdn.pixabay.com/photo/2015/05/11/07/17/vw-762050_960_720.jpg',
-      original:
-        'https://cdn.pixabay.com/photo/2015/05/11/07/17/vw-762050_960_720.jpg',
-      description: 'Surf',
-    },
-  ];
+inputValidators.forEach(el => {
+  el.addEventListener('focusin', (e) => {
+    e.target.classList.add('active');
+  });
+  el.addEventListener('input', (e) => {
+    el.classList.remove('valid', 'unvalid', 'active');
+    if (el.validity.valid) {
+      el.classList.add('valid');
+    } else {
+      el.classList.add('unvalid');
+    }
+  });
+  el.addEventListener('focusout', (e) => {
+    el.classList.remove('valid', 'unvalid', 'active');
+  })
+})
+
 
 
 const gallery = document.querySelector('.gallery');
@@ -148,10 +101,10 @@ const lightImg = document.querySelector('.lightbox__image');
 const lightbox = document.querySelector('.js-lightbox');
 const btnModalWindow = document.querySelector('button[data-action="close-lightbox"]');
 const lightOverlay = document.querySelector('.lightbox__overlay');
-const arr =  images.map( el =>el.original );
+const arr = images.map(el => el.original);
 
 
-const createList = function (arr){
+const createList = function (arr) {
   const array = [];
   arr.forEach(el => {
     const galleryItem = document.createElement('li');
@@ -175,69 +128,74 @@ const createList = function (arr){
   gallery.append(...array);
 }
 
-const openModalWindow = function (e){
+const openModalWindow = function (e) {
   e.preventDefault();
-  console.dir(document.bo)
   const currentTarget = e.target;
-  if(currentTarget === e.currentTarget){
+  if (currentTarget === e.currentTarget) {
     return;
   }
   lightImg.src = currentTarget.dataset.source;
   lightbox.classList.add('is-open');
-  
-  window.addEventListener('keydown',closeEsc);
+
+  window.addEventListener('keydown', actsForGallery);
 }
 
-const closeModalWindow = function(e){
+const closeModalWindow = function (e) {
   lightbox.classList.remove('is-open');
   lightImg.src = '';
-  window.removeEventListener('keydown',closeEsc);
+  window.removeEventListener('keydown', actsForGallery);
 }
 
-const closeOnOverlay = function(e){
-  if(e.target === lightImg){
+const closeOnOverlay = function (e) {
+  if (e.target === lightImg) {
     return;
   }
   closeModalWindow();
 }
 
-const closeEsc = function (e){
-    switch (e.code){
-      case 'Escape': closeModalWindow();break;
-      case 'ArrowRight': nextImg(e.target);break;
-      case 'ArrowLeft': prevImg();break;
-    }
-}
-  
-const nextImg = function(e){
-  const imgs = document.querySelectorAll(' .gallery__item .gallery__link .gallery__image');
-  const currentSrc = lightImg.src; //picture
-  const srcs = (Array.from(imgs)).map( img =>  img.dataset.source)
-  const currentIdx =srcs.indexOf(srcs.find(el => el === currentSrc))
-  let nextIdx  = currentIdx+1;
-  lightImg.src = arr[nextIdx];
-  if(currentIdx === imgs.length-1 ){
-  lightImg.src = arr[currentIdx];
+const actsForGallery = function (e) {
+  switch (e.code) {
+    case 'Escape':
+      closeModalWindow();
+      break;
+    case 'ArrowRight':
+      nextImg(e.target);
+      break;
+    case 'ArrowLeft':
+      prevImg();
+      break;
   }
 }
 
-const prevImg = function(a){
+const nextImg = function (e) {
   const imgs = document.querySelectorAll(' .gallery__item .gallery__link .gallery__image');
   const currentSrc = lightImg.src; //picture
-  const srcs = (Array.from(imgs)).map( img =>  img.dataset.source)
-  const currentIdx =srcs.indexOf(srcs.find(el => el === currentSrc))
-  let prevIdx  = currentIdx-1;
+  const srcs = (Array.from(imgs)).map(img => img.dataset.source)
+  const currentIdx = srcs.indexOf(srcs.find(el => el === currentSrc))
+  let nextIdx = currentIdx + 1;
+  lightImg.src = arr[nextIdx];
+  if (currentIdx === imgs.length - 1) {
+    lightImg.src = arr[currentIdx];
+  }
+}
+
+const prevImg = function (a) {
+  const imgs = document.querySelectorAll(' .gallery__item .gallery__link .gallery__image');
+  const currentSrc = lightImg.src; //picture
+  const srcs = (Array.from(imgs)).map(img => img.dataset.source)
+  const currentIdx = srcs.indexOf(srcs.find(el => el === currentSrc))
+  let prevIdx = currentIdx - 1;
   lightImg.src = arr[prevIdx];
-  if(currentIdx ===0 ){
+  if (currentIdx === 0) {
     lightImg.src = arr[currentIdx];
   }
 }
 
 
 
-gallery.addEventListener('click',openModalWindow);
+gallery.addEventListener('click', openModalWindow);
 btnModalWindow.addEventListener('click', closeModalWindow);
-lightbox.addEventListener('click',closeOnOverlay);
+lightbox.addEventListener('click', closeOnOverlay);
 
 
 createList(images);
@@ -249,12 +207,13 @@ const checkCheckout = Array.from(document.querySelectorAll('span[data-action="re
 const checkArticles = Array.from(document.querySelectorAll('span[data-action="red-uncheck"]'));
 let currentPage = 1;
 
-ARTICLES.addEventListener('click',paintSecondPage);
+ARTICLES.addEventListener('click', paintSecondPage);
 
-function paintSecondPage (e){
-    checkCheckout.forEach(el => el.classList.remove('checked'));
-    checkArticles.forEach(el => el.classList.add('checked'))
-    ROOT.innerHTML = ` <div class="offset-1 col-4">
+function paintSecondPage(e) {
+  successAudio.stop();
+  checkCheckout.forEach(el => el.classList.remove('checked'));
+  checkArticles.forEach(el => el.classList.add('checked'))
+  ROOT.innerHTML = ` <div class="offset-1 col-4">
     <div class="fast-search">
       <form class="search-form" data-action="fetch-articles">
           <button class="search-form__btn" type="submit"></button>
@@ -273,58 +232,58 @@ function paintSecondPage (e){
         </li>
     </ul>
     <button type="enter" class="dn" data-action="load-more"></button>
-     `    
-    const formForFetch = document.querySelector('form[ data-action="fetch-articles"]');
-    formForFetch.addEventListener('submit',sendRequest);
-    ARTICLES.removeEventListener('click',paintSecondPage);
+     `
+  const formForFetch = document.querySelector('form[ data-action="fetch-articles"]');
+  formForFetch.addEventListener('submit', sendRequest);
+  ARTICLES.removeEventListener('click', paintSecondPage);
 
 }
+const KEY = 'fb5321de553d4491bb466d124f3888d1';
 
-function sendRequest (e){
-    e.preventDefault();
-
-    currentPage = 1;
-    const rootForList = document.querySelector('ul[data-action="root-for-list"]');
-    let value = e.currentTarget.querySelector('input').value;
-    const btnForLoadMore = document.querySelector('button[data-action="load-more"]');
-
-    if(value.length !== 0){
-        fetch(`https://newsapi.org/v2/everything?q=${value}&apiKey=fb5321de553d4491bb466d124f3888d1&pageSize=12&page=${currentPage}`)
-        .then(res => res.json())
-        .then(data => {
-          PNotify.info('Please wait some time!')
-          console.log(data)
-            if(data.totalResults ===0){
-                btnForLoadMore.classList.remove('second-load-more');
-                PNotify.error('We can`t find any articles(')
-                rootForList.innerHTML = ``;
-                currentPage =1;
-            }
-            else{
-                currentPage +=1;
-                rootForList.innerHTML = createSecondList(data.articles);
-                btnForLoadMore.classList.add('second-load-more');
-                if(data.totalResults === rootForList.childElementCount){
-                    btnForLoadMore.classList.remove('second-load-more');
-                }
-                PNotify.success('All articles downloaded!)')
-            }
-        })
-          .catch(err =>{
-            PNotify.error('Sorry, but we were hacked(');
-            rootForList.innerHTML = ``
-          });
-          
-        
-        btnForLoadMore.addEventListener('click', loadMore)
-    }
-    else{
-        alert('Enter article');
-    }
+function sendRequest(e) {
+  e.preventDefault();
+  currentPage = 1;
+  const rootForList = document.querySelector('ul[data-action="root-for-list"]');
+  let value = e.currentTarget.querySelector('input').value;
+  const btnForLoadMore = document.querySelector('button[data-action="load-more"]');
+  if (value.length !== 0) {
+    fetchAnswer(value)
+      .then(data => {
+        PNotify.info('Please wait some time!')
+        if (data.data.totalResults === 0) {
+          btnForLoadMore.classList.remove('second-load-more');
+          PNotify.error('We can`t find any articles(')
+          rootForList.innerHTML = ``;
+          currentPage = 1;
+        } else {
+          currentPage += 1;
+          rootForList.innerHTML = createSecondList(data.data.articles);
+          btnForLoadMore.classList.add('second-load-more');
+          if (data.data.totalResults === rootForList.childElementCount) {
+            btnForLoadMore.classList.remove('second-load-more');
+          }
+          PNotify.success('All articles downloaded!)')
+        }
+      })
+      .catch(err => {
+        openHackMessage();
+        rootForList.innerHTML = ``
+      });
+    btnForLoadMore.addEventListener('click', loadMore)
+  } else {
+    PNotify.error('Enter article');
+  }
 }
-function createSecondItem(el){
-    if(el.urlToImage !== null && el.author !== null){
-        return `
+function fetchAnswer (value) {
+  return axios.get(`https://newsapi.org/v2/everything?q=${value}&apiKey=${KEY}&pageSize=12&page=${currentPage}`)
+}
+function openHackMessage(){
+  return PNotify.error('Sorry, but we were hacked(')
+}
+
+function createSecondItem(el) {
+  if (el.urlToImage !== null && el.author !== null) {
+    return `
     <li class="second-item" id="second-item">
         <a href="${el.url}" class="second-link" target="_blank">
             <h2 class="second-item--title">${el.title}</h2>
@@ -332,74 +291,82 @@ function createSecondItem(el){
             <p class="second-item--content"><span class="second-item--span">Author:</span> ${el.author}</p>
             <p class="indent">${el.description}</p>
         </a>
-    </li>` 
-    }
-    else{
-        return '';
-    }
-}
-function createSecondList(data){
-    return `${data.reduce((markup, el) => markup += createSecondItem(el), "")}`;
-}
-function loadMore (){
-
-    const rootForList = document.querySelector('ul[data-action="root-for-list"]');
-    let value = document.querySelector('input[data-action="search-query"]').value;
-    const btnForLoadMore = document.querySelector('button[data-action="load-more"]');
-
-    fetch(`https://newsapi.org/v2/everything?q=${value}&apiKey=fb5321de553d4491bb466d124f3888d1&pageSize=12&page=${currentPage}`)
-    .then(res => res.json()
-    .then(data => {
-            currentPage +=1;
-            rootForList.innerHTML += createSecondList(data.articles);
-            btnForLoadMore.classList.add('second-load-more');
-            PNotify.success('You can upload more articles!')
-            if(data.totalResults === rootForList.childElementCount){
-                btnForLoadMore.classList.remove('second-load-more');
-                 PNotify.error('Sorry, but all articles were downloaded(')
-
-            }
-
-    }))
-    .catch(err =>rootForList.innerHTML = `<img src="https://previews.123rf.com/images/zmiter/zmiter1604/zmiter160400177/55277925-creative-page-not-found-404-error-design-.jpg" width="100%"></a>`);
-    
+    </li>`
+  } else {
+    return '';
+  }
 }
 
+function createSecondList(data) {
+  return `${data.reduce((markup, el) => markup += createSecondItem(el), "")}`;
+}
 
-
-
-    
+function loadMore() {
+  const rootForList = document.querySelector('ul[data-action="root-for-list"]');
+  let value = document.querySelector('input[data-action="search-query"]').value;
+  const btnForLoadMore = document.querySelector('button[data-action="load-more"]');
+  fetchAnswer(value)
+  .then(data => {
+    currentPage += 1;
+          rootForList.innerHTML += createSecondList(data.data.articles);
+          btnForLoadMore.classList.add('second-load-more');
+          PNotify.success('You can upload more articles!')
+          if (data.data.totalResults === rootForList.childElementCount) {
+            btnForLoadMore.classList.remove('second-load-more');
+            PNotify.error('Sorry, but all articles were downloaded(')
+          }
   
+  })
+  .catch(err => {
+    openHackMessage();
+    rootForList.innerHTML = ``;
+  });
 
 
+}
 
 const loginForm = document.querySelector('form[data-action="login-form"]');
 const loginFormEmailInput = loginForm.querySelector('input[type="email"]');
 const loginFormPasswordInput = loginForm.querySelector('input[type="password"]');
 
 
+loginForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const localLogListJson = localStorage.getItem('loglist');
+  const localLogList = JSON.parse(localLogListJson);
+  const newUser = {
+    email: loginFormEmailInput.value,
+    password: loginFormPasswordInput.value
+  };
+  const foundUser = localLogList.find(el =>
+    el.email === newUser.email && el.password === newUser.password
+  );
+  if (typeof foundUser === 'undefined') {
+    PNotify.error('Неправильный логин или пароль!')
+    loginFormEmailInput.value = '';
+    loginFormPasswordInput.value = '';
+    loginFormPasswordInput.classList.remove('active');
+  } else {
+    //////////////открываем страницу и четотам
+    PNotify.success(`Вы успешно авторизованы! Хорошего дня, ${foundUser.name})`);
 
-loginForm.addEventListener('submit',(e) =>{
-    e.preventDefault();
-    const newUser = {
-        email:loginFormEmailInput.value,
-        password:loginFormPasswordInput.value
-    };
-    const foundUser =  LOGLIST.find(el =>
-        el.email === newUser.email && el.password === newUser.password
-    );
-     if(typeof foundUser === 'undefined'){
-        PNotify.error('Неправильный логин или пароль!')
-            loginFormEmailInput.value = '';
-            loginFormPasswordInput.value = '';
-     }
-     else{
-         //////////////открываем страницу и четотам
-         PNotify.success(`Вы успешно авторизованы! Хорошего дня, ${foundUser.name})`);
-         loginFormEmailInput.value = '';
-        loginFormPasswordInput.value = '';
-     }
     
+    if(musicText.textContent = 'Music off'){
+      audio.stop();
+      musicIcon.innerHTML = pauseMusic;
+        musicText.textContent = 'Music on';
+    }
+    
+
+    successAudio.play();
+    setTimeout(()=> {
+      successAudio.stop();
+    },10500)
+    loginFormEmailInput.value = '';
+    loginFormPasswordInput.value = '';
+    loginFormPasswordInput.classList.remove('active');
+  }
+
 })
 
 
@@ -414,180 +381,207 @@ const registerFormPasswordInput = registerForm.querySelector('input[name="regist
 
 
 
-registerForm.addEventListener('submit',(e) => {
-    e.preventDefault();
-    LOGLIST.push(registerNewUser(registerFormNameInput.value,registerFormEmailInput.value,registerFormPasswordInput.value)); 
-    registerFormNameInput.value = '';
-    registerFormEmailInput.value = '';
-    registerFormPasswordInput.value = '';
-    localStorage.setItem('loglist',JSON.stringify(LOGLIST));
+registerForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  LOGLIST.push(registerNewUser(registerFormNameInput.value, registerFormEmailInput.value, registerFormPasswordInput.value));
+  registerFormNameInput.value = '';
+  registerFormEmailInput.value = '';
+  registerFormPasswordInput.value = '';
+  localStorage.setItem('loglist', JSON.stringify(LOGLIST));
 })
 
-function registerNewUser (name,email,password){
-const alredyRegister = {
+function registerNewUser(name, email, password) {
+  const alredyRegister = {
     name,
     email,
     password,
-    xp:0
-}
-return alredyRegister;
+    xp: 0
+  }
+  PNotify.success(`Вы успешно зарегестрированы как ${name}`)
+  return alredyRegister;
 }
 
 const Theme = {
-    LIGHT: 'header-background--ligth',
-    DARK: 'header-background--dark',
-  };
-  const changeThemeBlock = document.querySelector('.js-switch-input');
-  const check = document.querySelector('#theme-switch-control');
-  const background = document.querySelector('div[data-action="background-js"]');
-  let localBackTheme;
-  let localContentTheme;
-  let localIconTheme;
-  let localTitleTheme;
-  let localReviewTheme;
-  let localIconBackTheme;
-  let localSecondItemTheme;
-  
-  if (Object.keys(localStorage).includes('back-theme')) {
-    background.classList = '';
-    background.classList.add(JSON.parse(localStorage.getItem('back-theme')));
-  }
-  if (background.classList.contains(Theme.DARK)) {
-    check.checked = true;
-  }
-  const changeTheme = function (remove, add) {
-    background.classList.remove(remove);
-    background.classList.add(add);
-    localBackTheme = add;
-  };
-    
-  
-  
-  const contentThemeChange = document.querySelector('div[data-action="dark"]');
-  
-  const ContentTheme = {
-    LIGHT: 'bcw',
-    DARK: 'bcd',
-  };
-  if (Object.keys(localStorage).includes('content-theme')) {
-    contentThemeChange.classList.remove('bcw');
-    contentThemeChange.classList.remove('bcd');
-    contentThemeChange.classList.add(
-      JSON.parse(localStorage.getItem('content-theme')),
-    );
-  }
-  const changeContentTheme = function (remove, add) {
-    contentThemeChange.classList.remove(remove);
-    contentThemeChange.classList.add(add);
-    localContentTheme = add;
-  };
-  
-  
-      const reviewChange = document.querySelector('.review');
-  
-      const reviewTheme = {
-        LIGHT: 'rl',
-        DARK: 'rd',
-      };
-      if (Object.keys(localStorage).includes('review-theme')) {
-        reviewChange.classList.remove('rl');
-        reviewChange.classList.remove('rd');
-        reviewChange.classList.add(JSON.parse(localStorage.getItem('review-theme')));
-      }
-      const changeReviewTheme = function (remove, add) {
-        reviewChange.classList.remove(remove);
-        reviewChange.classList.add(add);
-        localReviewTheme = add;
-      };
-  
-        const titleTheme = document.querySelectorAll('[data-action="dark-content"]');
-  
-        const TitleTheme = {
-          LIGHT: 'cd',
-          DARK: 'cw',
-        };
-        if (Object.keys(localStorage).includes('title-theme')) {
-          titleTheme.forEach(el => {
-            el.classList.remove('cd');
-            el.classList.remove('cw');
-            el.classList.add(JSON.parse(localStorage.getItem('title-theme')));
-          });
-        }
-        const changeTitleTheme = function (remove, add) {
-          titleTheme.forEach(el => {
-            el.classList.remove(remove);
-            el.classList.add(add);
-          });
-          localTitleTheme = add;
-        };
-  
-              const IconBackTheme = document.querySelectorAll(
-                '[data-action="dark-icon--back"]',
-              );
-              const TitleThemes = {
-                LIGHT: 'fd',
-                DARK: 'fw',
-              };
-              if (Object.keys(localStorage).includes('icon-back-theme')) {
-                IconBackTheme.forEach(el => {
-                  el.classList.remove('bcd');
-                  el.classList.remove('bcw');
-                  el.classList.add(JSON.parse(localStorage.getItem('icon-back-theme')));
-                });
-              }
-              const changeIconBackTheme = function (remove, add) {
-                IconBackTheme.forEach(el => {
-                  el.classList.remove(remove);
-                  el.classList.add(add);
-                });
-                localIconBackTheme = add;
-              };
-                    const IconTheme = document.querySelectorAll('[data-action="dark-icon"]');
-  
-                    if (Object.keys(localStorage).includes('icon-fill-theme')) {
-                      IconTheme.forEach(el => {
-                        el.classList.remove('fd');
-                        el.classList.remove('fw');
-                        el.classList.add(JSON.parse(localStorage.getItem('icon-fill-theme')));
-                      });
-                    }
-                    const changeIconTheme = function (remove, add) {
-                      IconTheme.forEach(el => {
-                        el.classList.remove(remove);
-                        el.classList.add(add);
-                      });
-                      localIconTheme = add;
-                    };
-  
-  
-  
-  
-  
-  
-  changeThemeBlock.addEventListener('change', e => {
-  
-    if (check.checked) {
-      changeTheme(Theme.LIGHT, Theme.DARK);
-      changeContentTheme(ContentTheme.LIGHT, ContentTheme.DARK);
-      changeTitleTheme(TitleTheme.LIGHT, TitleTheme.DARK);
-      changeIconBackTheme(ContentTheme.DARK, ContentTheme.LIGHT);
-      changeIconTheme(TitleThemes.DARK, TitleThemes.LIGHT);
-      changeReviewTheme(reviewTheme.LIGHT, reviewTheme.DARK);
-    }
-  
-    if (!check.checked) {
-      changeTheme(Theme.DARK, Theme.LIGHT);
-      changeContentTheme(ContentTheme.DARK, ContentTheme.LIGHT);
-      changeTitleTheme(TitleTheme.DARK, TitleTheme.LIGHT);
-      changeIconBackTheme(ContentTheme.LIGHT, ContentTheme.DARK);
-      changeIconTheme(TitleThemes.LIGHT, TitleThemes.DARK);
-      changeReviewTheme(reviewTheme.DARK, reviewTheme.LIGHT);
-    }
-    localStorage.setItem('back-theme', JSON.stringify(localBackTheme));
-    localStorage.setItem('content-theme', JSON.stringify(localContentTheme));
-    localStorage.setItem('title-theme', JSON.stringify(localTitleTheme));
-    localStorage.setItem('icon-back-theme', JSON.stringify(localIconBackTheme));
-    localStorage.setItem('icon-fill-theme', JSON.stringify(localIconTheme));
-    localStorage.setItem('review-theme', JSON.stringify(localReviewTheme));
+  LIGHT: 'header-background--ligth',
+  DARK: 'header-background--dark',
+};
+const changeThemeBlock = document.querySelector('.js-switch-input');
+const check = document.querySelector('#theme-switch-control');
+const background = document.querySelector('div[data-action="background-js"]');
+let localBackTheme;
+let localContentTheme;
+let localIconTheme;
+let localTitleTheme;
+let localReviewTheme;
+let localIconBackTheme;
+let localSecondItemTheme;
+
+if (Object.keys(localStorage).includes('back-theme')) {
+  background.classList = '';
+  background.classList.add(JSON.parse(localStorage.getItem('back-theme')));
+}
+if (background.classList.contains(Theme.DARK)) {
+  check.checked = true;
+}
+const changeTheme = function (remove, add) {
+  background.classList.remove(remove);
+  background.classList.add(add);
+  localBackTheme = add;
+};
+
+
+
+const contentThemeChange = document.querySelector('div[data-action="dark"]');
+
+const ContentTheme = {
+  LIGHT: 'bcw',
+  DARK: 'bcd',
+};
+if (Object.keys(localStorage).includes('content-theme')) {
+  contentThemeChange.classList.remove('bcw');
+  contentThemeChange.classList.remove('bcd');
+  contentThemeChange.classList.add(
+    JSON.parse(localStorage.getItem('content-theme')),
+  );
+}
+const changeContentTheme = function (remove, add) {
+  contentThemeChange.classList.remove(remove);
+  contentThemeChange.classList.add(add);
+  localContentTheme = add;
+};
+
+
+const reviewChange = document.querySelector('.review');
+
+const reviewTheme = {
+  LIGHT: 'rl',
+  DARK: 'rd',
+};
+if (Object.keys(localStorage).includes('review-theme')) {
+  reviewChange.classList.remove('rl');
+  reviewChange.classList.remove('rd');
+  reviewChange.classList.add(JSON.parse(localStorage.getItem('review-theme')));
+}
+const changeReviewTheme = function (remove, add) {
+  reviewChange.classList.remove(remove);
+  reviewChange.classList.add(add);
+  localReviewTheme = add;
+};
+
+const titleTheme = document.querySelectorAll('[data-action="dark-content"]');
+
+const TitleTheme = {
+  LIGHT: 'cd',
+  DARK: 'cw',
+};
+if (Object.keys(localStorage).includes('title-theme')) {
+  titleTheme.forEach(el => {
+    el.classList.remove('cd');
+    el.classList.remove('cw');
+    el.classList.add(JSON.parse(localStorage.getItem('title-theme')));
   });
-  
+}
+const changeTitleTheme = function (remove, add) {
+  titleTheme.forEach(el => {
+    el.classList.remove(remove);
+    el.classList.add(add);
+  });
+  localTitleTheme = add;
+};
+
+const IconBackTheme = document.querySelectorAll(
+  '[data-action="dark-icon--back"]',
+);
+const TitleThemes = {
+  LIGHT: 'fd',
+  DARK: 'fw',
+};
+if (Object.keys(localStorage).includes('icon-back-theme')) {
+  IconBackTheme.forEach(el => {
+    el.classList.remove('bcd');
+    el.classList.remove('bcw');
+    el.classList.add(JSON.parse(localStorage.getItem('icon-back-theme')));
+  });
+}
+const changeIconBackTheme = function (remove, add) {
+  IconBackTheme.forEach(el => {
+    el.classList.remove(remove);
+    el.classList.add(add);
+  });
+  localIconBackTheme = add;
+};
+const IconTheme = document.querySelectorAll('[data-action="dark-icon"]');
+
+if (Object.keys(localStorage).includes('icon-fill-theme')) {
+  IconTheme.forEach(el => {
+    el.classList.remove('fd');
+    el.classList.remove('fw');
+    el.classList.add(JSON.parse(localStorage.getItem('icon-fill-theme')));
+  });
+}
+const changeIconTheme = function (remove, add) {
+  IconTheme.forEach(el => {
+    el.classList.remove(remove);
+    el.classList.add(add);
+  });
+  localIconTheme = add;
+};
+
+
+
+
+
+
+changeThemeBlock.addEventListener('change', e => {
+
+  if (check.checked) {
+    changeTheme(Theme.LIGHT, Theme.DARK);
+    changeContentTheme(ContentTheme.LIGHT, ContentTheme.DARK);
+    changeTitleTheme(TitleTheme.LIGHT, TitleTheme.DARK);
+    changeIconBackTheme(ContentTheme.DARK, ContentTheme.LIGHT);
+    changeIconTheme(TitleThemes.DARK, TitleThemes.LIGHT);
+    changeReviewTheme(reviewTheme.LIGHT, reviewTheme.DARK);
+  }
+
+  if (!check.checked) {
+    changeTheme(Theme.DARK, Theme.LIGHT);
+    changeContentTheme(ContentTheme.DARK, ContentTheme.LIGHT);
+    changeTitleTheme(TitleTheme.DARK, TitleTheme.LIGHT);
+    changeIconBackTheme(ContentTheme.LIGHT, ContentTheme.DARK);
+    changeIconTheme(TitleThemes.LIGHT, TitleThemes.DARK);
+    changeReviewTheme(reviewTheme.DARK, reviewTheme.LIGHT);
+  }
+  localStorage.setItem('back-theme', JSON.stringify(localBackTheme));
+  localStorage.setItem('content-theme', JSON.stringify(localContentTheme));
+  localStorage.setItem('title-theme', JSON.stringify(localTitleTheme));
+  localStorage.setItem('icon-back-theme', JSON.stringify(localIconBackTheme));
+  localStorage.setItem('icon-fill-theme', JSON.stringify(localIconTheme));
+  localStorage.setItem('review-theme', JSON.stringify(localReviewTheme));
+});
+
+localStorage.setItem('ROOT', JSON.stringify(ROOT.innerHTML));
+
+
+const music = document.querySelector('#music');
+const musicText = music.querySelector('span');
+const musicIcon = music.querySelector('svg');
+const playMusic = '<path d="m436.508 74.94c-99.913-99.913-261.64-99.928-361.567 0-99.913 99.913-99.928 261.64 0 361.567 99.913 99.913 261.64 99.928 361.567 0 99.912-99.912 99.927-261.639 0-361.567zm-180.784 394.45c-117.816 0-213.667-95.851-213.667-213.667s95.851-213.666 213.667-213.666 213.666 95.851 213.666 213.667-95.85 213.666-213.666 213.666z"/><path d="m298.39 160.057c-11.598 0-21 9.402-21 21v149.333c0 11.598 9.402 21 21 21s21-9.402 21-21v-149.333c0-11.598-9.401-21-21-21z"/><path d="m213.057 160.057c-11.598 0-21 9.402-21 21v149.333c0 11.598 9.402 21 21 21s21-9.402 21-21v-149.333c0-11.598-9.401-21-21-21z"/>';
+const pauseMusic = '<path d="m436.508 74.941c-99.913-99.913-261.639-99.928-361.566 0-99.914 99.912-99.93 261.64 0 361.567 99.913 99.913 261.639 99.928 361.566 0 99.913-99.912 99.929-261.64 0-361.567zm-180.784 394.45c-117.816 0-213.667-95.851-213.667-213.667s95.851-213.666 213.667-213.666 213.667 95.851 213.667 213.667-95.85 213.666-213.667 213.666z"/><path d="m332.617 239.148-96-74.667c-13.774-10.715-33.893-.863-33.893 16.577v149.333c0 17.563 20.25 27.186 33.893 16.577l96-74.667c10.796-8.398 10.809-24.745 0-33.153zm-87.893 48.305v-63.458l40.795 31.729z"/>'
+
+
+music.addEventListener('click',(e) => {
+    if(musicText.textContent === 'Music on'){
+      successAudio.stop();
+        audio.play();
+        musicIcon.innerHTML = playMusic;
+        musicText.textContent = 'Music off';
+        return;
+    }
+    if(musicText.textContent === 'Music off'){
+        audio.stop();
+        musicIcon.innerHTML = pauseMusic;
+        musicText.textContent = 'Music on';
+    }
+})
+
+
