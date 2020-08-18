@@ -49,10 +49,15 @@
     "webpackbar": "^4.0.0"
   },
   "dependencies": {
+    "alertifyjs": "^1.13.1",
+    "animate.css": "^4.1.0",
     "axios": "^0.19.2",
     "bootbox": "^5.4.0",
     "core-js": "^3.3.4",
+    "crypto-js": "^4.0.0",
     "handlebars": "^4.5.3",
-    "pnotify": "^4.0.1"
+    "jquery": "^3.5.0",
+    "pnotify": "^4.0.1",
+    "shortid": "^2.2.15"
   }
 }
