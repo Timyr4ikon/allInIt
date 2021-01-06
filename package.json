@@ -51,7 +51,7 @@
   "dependencies": {
     "alertifyjs": "^1.13.1",
     "animate.css": "^4.1.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bootbox": "^5.4.0",
     "core-js": "^3.3.4",
     "crypto-js": "^4.0.0",
